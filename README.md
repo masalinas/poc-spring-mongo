@@ -2,6 +2,9 @@
 Spring MongoDB Keycloak Swagger Integration PoC
 
 # Dependencies
+Java Runtime (Spring Keycloak 11.x not works with upper version)
+- JVM 11
+
 Spring Boot dependencies:
 - Spring Boot 2.4.0
 
