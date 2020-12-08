@@ -23,3 +23,6 @@ Spring Swagger dependecies
 - Spring Swagger 2.9.2
 - Spring Swagger UI 2.9.2
 - Spring Swagger Validation 2.9.2
+
+# Scaffolding 
+[Spring initializr](https://start.spring.io)
