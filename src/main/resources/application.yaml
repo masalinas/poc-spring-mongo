@@ -1,13 +1,14 @@
 server:
     port: 8081
+    
 spring:
     data:
         mongodb:
             database: wmspoc
             port: 27017
+
 keycloak:
-    auth-server-url: http://localhost:8080/auth
     realm: oferto
+    auth-server-url: http://localhost:8080/auth
     resource: oferto
     public-client: true
-    principal-attribute: preferred_username

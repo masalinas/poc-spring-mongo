@@ -22,6 +22,7 @@ public class Product implements Serializable {
 	
 	public Product(String code, String description, float price) {
 		super();
+		
 		this.code = code;
 		this.description = description;
 		this.price = price;

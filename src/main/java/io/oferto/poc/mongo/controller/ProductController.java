@@ -3,6 +3,7 @@ package io.oferto.poc.mongo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.oferto.poc.mongo.domain.Product;
 import io.oferto.poc.mongo.repository.ProductRepository;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,6 +39,7 @@ public class ProductController {
 	
 	@GetMapping("/products")
 	@ApiOperation(value = "Get all products", nickname = "getAllProducts")
+	@RolesAllowed({"user", "admin"})
 	public ResponseEntity<List<Product>> getAllProducts() {
 		try {
 		    /*List<Product> products = new ArrayList<Product>();
@@ -57,6 +60,7 @@ public class ProductController {
 	
 	@ApiOperation(value = "Get product by Id", nickname = "getProductById")
 	@GetMapping("/products/{id}")
+	@RolesAllowed({"user", "admin"})
 	public ResponseEntity<Product> getProductById(@ApiParam(value="Id of the Product") @PathVariable("id") String id) {
 		Optional<Product> productData = productRepository.findById(id);
 
@@ -70,6 +74,7 @@ public class ProductController {
 	
 	@ApiOperation(value = "Create a product", nickname = "createProduct")
 	@PostMapping("/products")
+	@RolesAllowed("admin")
     @ApiResponses({
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 500, message = "Internal Server Error")
@@ -85,6 +90,7 @@ public class ProductController {
 	
 	@ApiOperation(value = "Update a product", nickname = "updateProduct")
 	@PutMapping("/products/{id}")
+	@RolesAllowed("admin")
 	public ResponseEntity<Product> updateProduct(@ApiParam(value="Id of the Product") @PathVariable("id") String id, @ApiParam(value="Product entity") @RequestBody Product product) {
 		Optional<Product> productData = productRepository.findById(id);
 
@@ -101,8 +107,9 @@ public class ProductController {
 		}		    
 	}
 	
-	@ApiOperation(value = "Remove a product", nickname = "deleteProduct")
+	@ApiOperation(value = "Delete a product", nickname = "deleteProduct")
 	@DeleteMapping("/products/{id}")
+	@RolesAllowed("admin")
     @ApiResponses({
         @ApiResponse(code = 500, message = "Internal Server Error")
     })
@@ -116,8 +123,9 @@ public class ProductController {
 		}	    
 	}
 	
-	@ApiOperation(value = "Patch a product", nickname = "pathProduct")
+	@ApiOperation(value = "Patch a product", nickname = "patchProduct")
 	@PatchMapping("/products/{id}")
+	@RolesAllowed("admin")
 	public ResponseEntity<Product> pathProduct(@ApiParam(value="Id of the Product") @PathVariable("id") String id, @ApiParam(value="Product patch") @RequestBody Product patch) {
 		try {			
 			Optional<Product> productData = productRepository.findById(id);
